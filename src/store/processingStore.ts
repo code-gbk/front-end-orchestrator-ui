@@ -7,12 +7,14 @@ interface ProcessingState {
   activeJob: ProcessingJob | null;
   selectedModel: string | null;
   uploadedFile: File | null;
+  projectName: string | null;
   setJobs: (jobs: ProcessingJob[]) => void;
   addJob: (job: ProcessingJob) => void;
   updateJob: (jobId: string, updates: Partial<ProcessingJob>) => void;
   setActiveJob: (job: ProcessingJob | null) => void;
   setSelectedModel: (modelId: string | null) => void;
   setUploadedFile: (file: File | null) => void;
+  setProjectName: (name: string | null) => void;
 }
 
 export const useProcessingStore = create<ProcessingState>((set) => ({
@@ -20,6 +22,7 @@ export const useProcessingStore = create<ProcessingState>((set) => ({
   activeJob: null,
   selectedModel: null,
   uploadedFile: null,
+  projectName: null,
   setJobs: (jobs) => set({ jobs }),
   addJob: (job) => set((state) => ({ jobs: [job, ...state.jobs] })),
   updateJob: (jobId, updates) =>
@@ -35,4 +38,5 @@ export const useProcessingStore = create<ProcessingState>((set) => ({
   setActiveJob: (job) => set({ activeJob: job }),
   setSelectedModel: (modelId) => set({ selectedModel: modelId }),
   setUploadedFile: (file) => set({ uploadedFile: file }),
+  setProjectName: (name) => set({ projectName: name }),
 }));
