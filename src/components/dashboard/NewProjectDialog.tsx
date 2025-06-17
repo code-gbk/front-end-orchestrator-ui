@@ -20,11 +20,11 @@ export const NewProjectDialog = () => {
   const [projectName, setProjectName] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
-  const setProjectName = useProcessingStore((state) => state.setProjectName);
+  const setStoreProjectName = useProcessingStore((state) => state.setProjectName);
 
   const handleCreateProject = () => {
     if (projectName.trim()) {
-      setProjectName(projectName.trim());
+      setStoreProjectName(projectName.trim());
       setIsOpen(false);
       setProjectName('');
       navigate('/dashboard/upload');

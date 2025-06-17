@@ -22,13 +22,16 @@ const getStatusBadge = (status: ProcessingJob['status']) => {
   const statusConfig = {
     pending: { variant: 'secondary' as const, label: 'Uploaded' },
     processing: { variant: 'default' as const, label: 'Processing' },
-    completed: { variant: 'default' as const, label: 'Completed', className: 'bg-green-600 hover:bg-green-700' },
+    completed: { variant: 'default' as const, label: 'Completed' },
     failed: { variant: 'destructive' as const, label: 'Failed' },
   };
 
   const config = statusConfig[status];
   return (
-    <Badge variant={config.variant} className={config.className}>
+    <Badge 
+      variant={config.variant} 
+      className={status === 'completed' ? 'bg-green-600 hover:bg-green-700' : undefined}
+    >
       {config.label}
     </Badge>
   );
