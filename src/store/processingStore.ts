@@ -1,6 +1,7 @@
 
 import { create } from 'zustand';
 import { ProcessingJob } from '@/types';
+import { ModelParameters, DEFAULT_PARAMETERS } from '@/types/modelParameters';
 
 interface ProcessingState {
   jobs: ProcessingJob[];
@@ -8,6 +9,7 @@ interface ProcessingState {
   selectedModel: string | null;
   uploadedFile: File | null;
   projectName: string | null;
+  modelParameters: ModelParameters;
   setJobs: (jobs: ProcessingJob[]) => void;
   addJob: (job: ProcessingJob) => void;
   updateJob: (jobId: string, updates: Partial<ProcessingJob>) => void;
@@ -15,6 +17,7 @@ interface ProcessingState {
   setSelectedModel: (modelId: string | null) => void;
   setUploadedFile: (file: File | null) => void;
   setProjectName: (name: string | null) => void;
+  setModelParameters: (parameters: ModelParameters) => void;
 }
 
 export const useProcessingStore = create<ProcessingState>((set) => ({
@@ -23,6 +26,7 @@ export const useProcessingStore = create<ProcessingState>((set) => ({
   selectedModel: null,
   uploadedFile: null,
   projectName: null,
+  modelParameters: DEFAULT_PARAMETERS,
   setJobs: (jobs) => set({ jobs }),
   addJob: (job) => set((state) => ({ jobs: [job, ...state.jobs] })),
   updateJob: (jobId, updates) =>
@@ -39,4 +43,5 @@ export const useProcessingStore = create<ProcessingState>((set) => ({
   setSelectedModel: (modelId) => set({ selectedModel: modelId }),
   setUploadedFile: (file) => set({ uploadedFile: file }),
   setProjectName: (name) => set({ projectName: name }),
+  setModelParameters: (parameters) => set({ modelParameters: parameters }),
 }));

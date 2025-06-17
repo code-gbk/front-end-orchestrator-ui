@@ -1,5 +1,6 @@
 
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -58,6 +59,7 @@ interface ModelSelectionProps {
 }
 
 export const ModelSelection = ({ onNext, onBack }: ModelSelectionProps) => {
+  const navigate = useNavigate();
   const { selectedModel, setSelectedModel } = useProcessingStore();
 
   // In a real app, you'd use this query
@@ -74,6 +76,10 @@ export const ModelSelection = ({ onNext, onBack }: ModelSelectionProps) => {
     if (score >= 90) return 'bg-green-500';
     if (score >= 80) return 'bg-yellow-500';
     return 'bg-orange-500';
+  };
+
+  const handleNext = () => {
+    navigate('/model-parameters');
   };
 
   if (isLoading) {
@@ -143,8 +149,8 @@ export const ModelSelection = ({ onNext, onBack }: ModelSelectionProps) => {
         <Button variant="outline" onClick={onBack}>
           Back to Upload
         </Button>
-        <Button onClick={onNext} disabled={!selectedModel} size="lg">
-          Start Processing
+        <Button onClick={handleNext} disabled={!selectedModel} size="lg">
+          Configure Parameters
         </Button>
       </div>
     </div>
